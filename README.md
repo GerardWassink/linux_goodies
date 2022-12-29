@@ -2,10 +2,11 @@
 In this repo I drop my (more or less) handy little tools I make in the course of time
 
 ## Network stuff
-TCP/IP networks can be a hand full. 
+TCP/IP networks can be a handfull. 
 There's a lot of tools and utilities to handle them. 
-Just to apply and further my knowledge about them, I created a couple of tools, in bash script.
+Just to apply and further my knowledge about them, I created a couple of tools, at first in bash scripts.
 
+Networks have ranges of IP addresses, resulting in network sizes.
 Following are the ranges of Class A, B, and C Internet addresses, each with an example address:
 
 - Class A networks use a default subnet mask of 255.0.0.0 and have 0-127 as their first octet. The address 10.52.36.11 is a class A address. Its first octet is 10, which is between 1 and 126, inclusive.
