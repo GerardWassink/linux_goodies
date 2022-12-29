@@ -2,6 +2,9 @@
 In this repo I drop my (more or less) handy little tools I make in the course of time
 
 ## Network stuff
+TCP/IP networks can be a hand full. 
+There's a lot of tools and utilities to handle them. 
+Just to apply and further my knwoledge about them, I created a couple of tools, in bash script.
 
 ### lancheck
 Purpose: scan a class C network for active IP addresses
