@@ -20,6 +20,8 @@ It is this ***/24*** that is checked for in the `lancheck` script to ensure we h
 Class A networks are denoted with a ***/8***, class B networks with ***/16***.
 These numbers stand for the number if bits that are 'fixed' in the specific network.
 
+## Network utils
+
 ### lancheck
 Purpose: scan a class C network for active IP addresses
 Range to be scanned can be specified in two numeric parameters.
