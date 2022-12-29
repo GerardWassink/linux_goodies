@@ -9,7 +9,8 @@ Just to apply and further my knowledge about them, I created a couple of tools, 
 #### Classes 
 Networks have ranges of IP addresses, resulting in network sizes. 
 An IP (version 4) address consists of four tuples or octets.
-Each tuple has 8 bits, so a TCP-IP adress has 32 bits.
+Each tuple has 8 bits, so a TCP-IP adress has 32 bits. 
+A tuple or octet can span from 0 to 255. In this setup, 0 and 255 are reserved values.
 
 Following are the ranges of Class A, B, and C Internet addresses, each with an example address:
 
