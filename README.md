@@ -2,7 +2,7 @@
 In this repo I drop my (more or less) handy little tools I make in the course of time
 
 ## About networks
-TCP/IP [^1] networks can be a handful.
+TCP/IP networks can be a handful.
 There's a lot of tools and utilities to handle them. 
 Just to apply and further my knowledge about them, I created a couple of tools, at first in bash scripts.
 
@@ -39,5 +39,3 @@ See for use the `lancheck` script.
 #### getnw
 This script will print the type of network. This will give the number after the IP address, i.e. '/24' in 'a.b.c.d/24' in a class C network.
 See for use the `lancheck` script.
-
-[^1] Footnote for TCP/IP
