@@ -8,7 +8,9 @@ Just to apply and further my knwoledge about them, I created a couple of tools, 
 
 ### lancheck
 Purpose: scan a class C network for active IP addresses
-Range to be scanned can be specified in two numeric parameters of which the first one must be greater than or equal to the second. Scan will be performed as follows:
+Range to be scanned can be specified in two numeric parameters.
+The first one must be greater than or equal to the second. 
+Scan will be performed as follows:
 - `lancheck` - this will scan for addresse from 1-254
 - `lancheck x` - this will scan only address x
 - `lancheck x y` - this will scan addresses from x up to and inclusing y
