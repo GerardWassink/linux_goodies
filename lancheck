@@ -45,22 +45,18 @@ echo "assuming we have a class C network (netmask 255.255.255.0)"
 #
 # *** Determine our IP address and the four tuples
 #
-echo "checking our network IP address..."
+echo "checking our network type and IP address..."
+
 #
-# *** use these commented out lines 
-# ***  when you do not have the getip adn getnw scripts:
-#
-#line=`ip a | grep "inet " | grep -v "127.0.0.1"`
-#ipa=`echo ${line} | awk -F " " '{print $2}'`
-#fip=`echo ${ipa} | awk -F "/" '{print $1}'`
-#nw=`echo ${ipa} | awk -F "/" '{print $2}'`
-#
-# *** if using above lines, comment out these lines:
+# ***  for this script you also need the getip and getcl scripts:
 #
 fip=`getip`
-nw=`getnw`
+cl=`getcl`
 
-if [ ${nw} != "24" ]; then
+if [ "${cl}" == "C" ];
+then
+  echo "okay, we do have a class C network"
+else
   echo "not a class C network, exiting"
   exit 1
 fi
@@ -74,7 +70,7 @@ t3=`echo ${fip} | awk -F "." '{print $3}'`
 t4=`echo ${fip} | awk -F "." '{print $4}'`
 netbase="${t1}.${t2}.${t3}."
 
-echo "our ip is ${t1}.${t2}.${t3}.${t4}/${nw}"
+echo "our ip is ${t1}.${t2}.${t3}.${t4}"
 
 #
 # *** initialize from and to addresses
