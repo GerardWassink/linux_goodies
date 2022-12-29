@@ -43,14 +43,15 @@ Scan will be performed as follows:
 - `lancheck x y` - this will scan addresses from x up to and inclusing y
 
 #### getip
-This script will print the computer's IP address in the network.
+This script will print the system's IP address in the network.
 See for use the `lancheck` script.
 
 #### getnw
-This script will print the type of network. This will give the number after the IP address, i.e. '/24' in 'a.b.c.d/24' in a class C network.
+This script will print the type of network. 
+It will give the number after the IP address, i.e. '/24' in 'a.b.c.d/24' in a class C network.
 See for use the `getcl` script.
 
 #### getcl
 This script will print the type of network. 
-This will be A, B, C or ?. '?' designates an unknown (exotic?) network typs.
+This will be A, B, C or ?. '?' designates an unknown (exotic?) network type.
 See for use the `lancheck` script.
