@@ -1,11 +1,12 @@
 # linux_goodies
 In this repo I drop my (more or less) handy little tools I make in the course of time
 
-## Network stuff
-TCP/IP networks can be a handfull. 
+## About networks
+TCP/IP networks can be a handful.
 There's a lot of tools and utilities to handle them. 
 Just to apply and further my knowledge about them, I created a couple of tools, at first in bash scripts.
 
+#### Classes 
 Networks have ranges of IP addresses, resulting in network sizes.
 Following are the ranges of Class A, B, and C Internet addresses, each with an example address:
 
