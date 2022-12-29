@@ -4,7 +4,7 @@ In this repo I drop my (more or less) handy little tools I make in the course of
 ## Network stuff
 TCP/IP networks can be a hand full. 
 There's a lot of tools and utilities to handle them. 
-Just to apply and further my knwoledge about them, I created a couple of tools, in bash script.
+Just to apply and further my knowledge about them, I created a couple of tools, in bash script.
 
 Following are the ranges of Class A, B, and C Internet addresses, each with an example address:
 
@@ -14,6 +14,8 @@ Following are the ranges of Class A, B, and C Internet addresses, each with an e
 
 - Class C networks use a default subnet mask of 255.255.255.0 and have 192-223 as their first octet. The address 192.168.123.132 is a class C address. Its first octet is 192, which is between 192 and 223, inclusive.
 
+A class C network can be denoted as 192.x.y.z***/24***. 
+It is this ***/24*** that is checked for in the `lancheck` script to ensure we have a class C network.
 
 ### lancheck
 Purpose: scan a class C network for active IP addresses
