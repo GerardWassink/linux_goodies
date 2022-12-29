@@ -1,0 +1,160 @@
+#!/bin/bash
+
+# ------------------------------------------------------------------------- #
+# Name   : lancheck
+# Author : Gerard Wassink
+# Date   : December 2022
+# Purpose: scan a class C network for active IP addresses
+# Versions:
+#   0.1  : Initial code base
+#   
+# -------------------------------------------------------------------------#
+#             GNU LICENSE CONDITIONS
+# -------------------------------------------------------------------------#
+# This program is free software; you can redistribute it and/or modify
+# it under the terms of the GNU General Public License as published by
+# the Free Software Foundation; either version 2 of the License, or
+# (at your option) any later version.
+#
+# This program is distributed in the hope that it will be useful,
+# but WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+# GNU General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License along
+# with this program; if not, write to the Free Software Foundation, Inc.,
+# 51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
+#
+# -------------------------------------------------------------------------#
+#       Copyright (C) December 2022 Gerard Wassink
+# -------------------------------------------------------------------------#
+
+#
+# *** Define color codes
+#
+LC='\033[1;36m'  # Light Cyan's ANSI color code
+NC='\033[0m'     # Nocolor's ANSI color code
+
+
+#
+# *** announce who we are and what we are going to do
+#
+echo "lancheck scans the network for responding ip addresses"
+echo "assuming we have a class C network (netmask 255.255.255.0)"
+
+#
+# *** Determine our IP address and the four tuples
+#
+echo "checking our network IP address..."
+#
+# *** use these commented out lines 
+# ***  when you do not have the getip adn getnw scripts:
+#
+#line=`ip a | grep "inet " | grep -v "127.0.0.1"`
+#ipa=`echo ${line} | awk -F " " '{print $2}'`
+#fip=`echo ${ipa} | awk -F "/" '{print $1}'`
+#nw=`echo ${ipa} | awk -F "/" '{print $2}'`
+#
+# *** if using above lines, comment out these lines:
+#
+fip=`getip`
+nw=`getnw`
+
+if [ ${nw} != "24" ]; then
+  echo "not a class C network, exiting"
+  exit 1
+fi
+
+#
+# *** split off four IP-address tuples:
+#
+t1=`echo ${fip} | awk -F "." '{print $1}'`
+t2=`echo ${fip} | awk -F "." '{print $2}'`
+t3=`echo ${fip} | awk -F "." '{print $3}'`
+t4=`echo ${fip} | awk -F "." '{print $4}'`
+netbase="${t1}.${t2}.${t3}."
+
+echo "our ip is ${t1}.${t2}.${t3}.${t4}/${nw}"
+
+#
+# *** initialize from and to addresses
+#
+fromip=1
+toip=254
+
+#
+# *** verify arguments
+#
+number='^[0-9]+$'
+if [ ${#} -gt 0 ];
+then
+  if ! [[ ${1} =~ ${number} ]] ;then
+    echo "argument 1 not numeric"
+    exit 1
+  else
+    fromip=${1}; 					# assume only one argument for now
+    toip=${1};						#  so both from and two are the samen
+  fi
+fi
+if [ ${#} -eq 2 ];
+then
+  if ! [[ ${2} =~ ${number} ]] ;then
+    echo "argument 2 not numeric"
+    exit 1
+  else
+    toip=${2};						# second argument valid, fill toip
+    if [ ${1} -gt ${2} ]; then
+      echo "argument 1 (${1}) greater than argument 2 (${2}); not able to comply"
+      exit 1
+    fi
+  fi
+fi
+
+#
+# *** Prepare output file in /tmp
+#
+ofile="/tmp/ipslist"
+
+#
+# *** Announce range being tested
+#
+echo "list of addresses responding to ping in this LAN:" > ${ofile}
+echo "testing from ${netbase}${fromip} to ${netbase}${toip}" | tee -a ${ofile}
+
+#
+# *** Iterate through the IP addresses in the network
+#
+for ((tuple = ${fromip}; tuple<=${toip}; tuple++))
+do
+  ip="${netbase}${tuple}"
+  rc=1
+  ping -c 1 -4 -W 0.6 -i 0.5 ${ip} >/dev/null 2>&1 && rc=0
+  #
+  # *** Did our ping succeed?
+  #
+  if [ ${rc} -eq 0 ]
+  then
+    echo -ne "${LC}${tuple}${NC} "
+    echo "${ip}" >>${ofile}
+  else
+    echo -n ". "
+  fi
+done
+echo "--- end of list ---" >>${ofile}
+
+#
+# *** results have been stored in /tmp file, show them
+#
+echo ""
+echo ""
+echo "REPORT:"
+cat ${ofile}
+
+#
+# *** delete temporary file now:
+# ***  like to keep the output? comment out the line below:
+#
+rm ${ofile}
+
+exit 0
+
