@@ -16,6 +16,8 @@ Following are the ranges of Class A, B, and C Internet addresses, each with an e
 
 A class C network can be denoted as ***192.x.y.z/24***. 
 It is this ***/24*** that is checked for in the `lancheck` script to ensure we have a class C network.
+Class A networks are denoted with a ***/8***, class B networks with ***/16***.
+These numbers stand for the number if bits that are 'fixed' in the specific network.
 
 ### lancheck
 Purpose: scan a class C network for active IP addresses
